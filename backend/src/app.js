@@ -11,7 +11,7 @@ const server = createServer(app);
 
 // Configure CORS for Express
 const corsOptions = {
-    origin: ['https://deploy-6-b27s.onrender.com/', 'http://localhost:3000'], // Add your frontend URLs
+    origin: ['https://deploy-bc2n.onrender.com/', 'http://localhost:3000'], // Add your frontend URLs
     methods: 'GET, POST, PUT, DELETE',
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
@@ -31,7 +31,7 @@ app.use("/api/v1/meetings", meetingRoutes);
 // Configure Socket.IO
 const io = connectToSocket(server, {
     cors: {
-        origin: 'https://deploy-6-b27s.onrender.com/',
+        origin: 'https://deploy-bc2n.onrender.com/',
         methods: ["GET", "POST"],
         allowedHeaders: ["Content-Type", "Authorization"],
         credentials: true
