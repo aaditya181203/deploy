@@ -41,7 +41,7 @@ export default function VideoMeetComponent() {
 
     // Function to handle fullscreen for remote videos
     const toggleRemoteFullscreen = (videoId) => {
-        const videoElement = document.querySelector([data-socket="${videoId}"]);
+        const videoElement = document.querySelector(`[data-socket="${videoId}"]`);
         if (!document.fullscreenElement) {
             if (videoElement && videoElement.requestFullscreen) {
                 videoElement.requestFullscreen();
