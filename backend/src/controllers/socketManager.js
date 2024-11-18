@@ -9,7 +9,7 @@ let timeOnline = {};
 export const connectToSocket = (server) => {
  const io = new Server(server, {
   cors: {
-    origin: "https://deploy-bc2n.onrender.com/", // Replace with your actual frontend URL
+    origin: "https://deploy-1-byxd.onrender.com", // Replace with your actual frontend URL
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
