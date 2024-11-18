@@ -113,7 +113,7 @@ export default function VideoMeetComponent() {
         console.log("HELLO")
         getPermissions();
 
-    })
+    },[]);
 
     let getDislayMedia = () => {
         if (screen) {
@@ -167,7 +167,7 @@ export default function VideoMeetComponent() {
     };
 
     useEffect(() => {
-        if (video !== undefined && audio !== undefined) {
+        if (video || audio) {
             getUserMedia();
             console.log("SET STATE HAS ", video, audio);
 
@@ -335,8 +335,9 @@ export default function VideoMeetComponent() {
 
             socketRef.current.on('user-joined', (id, clients) => {
                 clients.forEach((socketListId) => {
-
-                    connections[socketListId] = new RTCPeerConnection(peerConfigConnections)
+                    if(!connections[socketListId]) {
+                        connections[socketListId] = new RTCPeerConnection(peerConfigConnections)
+                    }
                     // Wait for their ice candidate       
                     connections[socketListId].onicecandidate = function (event) {
                         if (event.candidate != null) {
@@ -429,11 +430,11 @@ export default function VideoMeetComponent() {
 
     let handleVideo = () => {
         setVideo(!video);
-        // getUserMedia();
+        getUserMedia();
     }
     let handleAudio = () => {
         setAudio(!audio)
-        // getUserMedia();
+        getUserMedia();
     }
 
     useEffect(() => {
@@ -461,6 +462,7 @@ export default function VideoMeetComponent() {
     const startScreenShare = () => {
         console.log('Screen sharing started');
         // Add your actual screen sharing logic here
+         
     };
 
     // Mock stop screen share function
