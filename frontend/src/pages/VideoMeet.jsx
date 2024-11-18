@@ -590,7 +590,7 @@ export default function VideoMeetComponent() {
 
                 <video className={styles.meetUserVideo} ref={localVideoref} autoPlay muted></video>
 
-                <div className={${styles.conferenceView} ${isScreenSharing ? styles.hasScreenShare : ''}}>
+                <div className={`${styles.conferenceView} ${isScreenSharing ? styles.hasScreenShare : ''}`}>
                     {videos.map((video) => (
                          <video
             key={video.socketId}
