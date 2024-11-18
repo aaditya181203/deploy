@@ -2,9 +2,10 @@
     position: relative;
     height: 100vh;
     background: rgb(1, 4, 48);
+    overflow: hidden;
 }
 
-.meetUser Video {
+.meetUserVideo {
     position: absolute;
     bottom: 10vh;
     height: 15vh; 
@@ -12,7 +13,6 @@
     left: 10px;
     border-radius: 20px;
     z-index: 10; 
-    transition: all 0.3s ease; /* Smooth transition */
 }
 
 .buttonContainers {
@@ -20,49 +20,71 @@
     width: 100vw;
     bottom: 0;
     text-align: center;
+    z-index: 20;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px 0;
 }
 
 .buttonContainers svg {
     font-size: 3rem;
 }
 
+/* Conference view styles */
 .conferenceView { 
-    display: flex;
-    flex-wrap: wrap; 
-    justify-content: center; 
-    align-items: flex-start; 
-    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 10px;
-    height: calc(100vh - 15vh); 
-    overflow-y: auto; 
+    padding: 20px;
+    height: calc(100vh - 15vh);
+    overflow-y: auto;
+    box-sizing: border-box;
 }
 
+/* Default video styles */
 .conferenceView video {
-    width: 30vw; 
-    height: auto; 
+    width: 100%;
+    height: 100%;
     min-width: 200px;
     max-height: 40vh;
     border-radius: 10px;
-    transition: all 0.3s ease; /* Smooth transition */
+    object-fit: cover;
 }
 
-/* New classes for maximizing and minimizing */
-.video-maximized {
-    position: fixed; /* Cover the entire viewport */
-    top: 0;
-    left: 0;
-    width: 100vw; /* Full width */
-    height: 100vh; /* Full height */
-    z-index: 100; /* Above other elements */
-    border-radius: 0; /* Remove border radius */
+/* Special styles for screen share video */
+.conferenceView video[data-screenshare="true"] {
+    max-height: none;
+    height: calc(85vh - 100px);
+    width: 100%;
+    object-fit: contain;
+    background: #000;
+    grid-column: 1 / -1;
+    grid-row: 1;
+    margin-bottom: 10px;
 }
 
-.video-minimized {
-    width: 15vw; /* Reduced width for minimized state */
-    max-height: 10vh; /* Max height for minimized state */
-    z-index: 10; /* Ensure it stays above other elements but below maximized */
+/* Adjust grid when screen sharing is active */
+.conferenceView.screenShareActive {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: 20px;
 }
 
+.conferenceView.screenShareActive > div:not(:first-child) {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.conferenceView.screenShareActive > div:not(:first-child) video {
+    width: 200px;
+    height: 150px;
+    min-width: 150px;
+    max-height: none;
+    object-fit: cover;
+}
+
+/* Chat room styles */
 .chatRoom {
     position: absolute;
     height: 90vh;
@@ -71,6 +93,8 @@
     border-radius: 10px;
     width: 30vw;
     padding-inline: 20px;
+    z-index: 15;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .chatContainer {
@@ -78,7 +102,60 @@
     height: 100%;
 }
 
+.chattingDisplay {
+    height: calc(100% - 120px);
+    overflow-y: auto;
+    padding: 10px;
+}
+
 .chattingArea {
     position: absolute;
     bottom: 0;
+    width: calc(100% - 40px);
+    padding: 20px 0;
+    display: flex;
+    gap: 10px;
+}
+
+/* Scrollbar styles for chat and video containers */
+.chattingDisplay::-webkit-scrollbar,
+.conferenceView::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.chattingDisplay::-webkit-scrollbar-thumb,
+.conferenceView::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .conferenceView {
+        padding: 10px;
+    }
+
+    .conferenceView.screenShareActive video[data-screenshare="true"] {
+        height: 40vh;
+    }
+
+    .conferenceView.screenShareActive > div:not(:first-child) {
+        height: calc(45vh - 100px);
+    }
+
+    .chatRoom {
+        width: 100vw;
+        height: 50vh;
+        bottom: 15vh;
+    }
+
+    .buttonContainers svg {
+        font-size: 2rem;
+    }
+
+    .meetUserVideo {
+        height: 12vh;
+        bottom: 8vh;
+    }
 }
