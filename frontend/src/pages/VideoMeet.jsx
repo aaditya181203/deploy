@@ -451,14 +451,12 @@ export default function VideoMeetComponent() {
            enterFullScreen(document.documentElement);
            
            // Broadcast start of screen share to others
-           signalingChannel.send({ type: "SCREEN_SHARE_STARTED" });
        } else {
            stopScreenShare();
            setScreen(false);
            exitFullScreen();
            
            // Broadcast stop of screen share to others
-           signalingChannel.send({ type: "SCREEN_SHARE_STOPPED" });
        }
    };
     // Mock start screen share function
