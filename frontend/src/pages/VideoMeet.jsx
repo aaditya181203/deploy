@@ -444,21 +444,19 @@ export default function VideoMeetComponent() {
     let handleScreen = () => {
     // setScreen(!screen);
     // setIsScreenSharing(!screen);
-    let handleScreen = () => {
-       if (!screen) {
-           startScreenShare();
-           setScreen(true);
-           enterFullScreen(document.documentElement);
-           
-           // Broadcast start of screen share to others
-       } else {
-           stopScreenShare();
-           setScreen(false);
-           exitFullScreen();
-           
-           // Broadcast stop of screen share to others
-       }
-   };
+    if (!screen) {
+            // Start screen sharing
+            startScreenShare();
+            setScreen(true);
+            enterFullScreen(document.documentElement); // Enter full screen when sharing starts
+        } 
+    else {
+            // Stop screen sharing
+            stopScreenShare();
+            setScreen(false);
+            exitFullScreen(); // Exit full screen when sharing stops
+        }
+    }
     // Mock start screen share function
     const startScreenShare = () => {
         console.log('Screen sharing started');
