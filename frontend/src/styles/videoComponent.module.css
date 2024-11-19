@@ -26,6 +26,18 @@
     font-size: 3rem;
 }
 
+.login-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.login-button:hover {
+    background-color: #0056b3;
+}
+
 .conferenceView { 
     display: flex;
     flex-wrap: wrap; 
@@ -111,3 +123,11 @@ video:fullscreen {
     height: 100vh;
     object-fit: contain;
 }
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height */
+}
+
